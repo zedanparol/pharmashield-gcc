@@ -1,0 +1,317 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * PHARMASHIELD INTELLIGENCE SYSTEM — design tokens
+ *
+ * Three voices:   Serif says   · headlines and findings      (IBM Plex Serif)
+ *                 Sans explains · interface and body copy     (IBM Plex Sans)
+ *                 Mono measures · figures, labels, identifiers (IBM Plex Mono)
+ *
+ * Surfaces are flat and separated by hairline rules, not shadows. Colour is
+ * reserved: blue for interaction and TOPSIS quality, cyan for routes and live
+ * signals, emerald / amber / red for status only.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-serif: var(--font-plex-serif), ui-serif, Georgia, serif;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@theme inline {
+  --color-teal: var(--cyan);
+  --color-cyan: var(--cyan);
+  --color-signal: var(--signal);
+  --color-navy: var(--navy);
+  --color-rule: var(--rule);
+  --color-faint: var(--faint);
+  --color-surface-2: var(--surface-2);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-heat: var(--heat);
+  --color-status-good: var(--status-good);
+  --color-status-warning: var(--status-warning);
+  --color-status-serious: var(--status-serious);
+  --color-status-critical: var(--status-critical);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-series-3: var(--series-3);
+  --color-series-4: var(--series-4);
+  --color-series-5: var(--series-5);
+  --color-series-6: var(--series-6);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-axis: var(--chart-axis);
+}
+
+/* Paper theme: warm off-white canvas, near-black ink, graphite chrome. */
+:root {
+  --radius: 0.3rem;
+  --navy: #0a0d13;
+
+  --background: #f2f0eb;
+  --foreground: #12161f;
+  --card: #fbfaf7;
+  --card-foreground: #12161f;
+  --popover: #ffffff;
+  --popover-foreground: #12161f;
+  --surface-2: #eceae3;
+  --primary: #1f5fe0;
+  --primary-foreground: #ffffff;
+  --secondary: #e7e4dc;
+  --secondary-foreground: #1b2130;
+  --muted: #e9e6df;
+  --muted-foreground: #5b6270;
+  --faint: #8a909c;
+  --accent: #e6e3db;
+  --accent-foreground: #12161f;
+  --destructive: #c8372f;
+  --border: rgb(18 22 31 / 0.12);
+  --rule: rgb(18 22 31 / 0.34);
+  --input: rgb(18 22 31 / 0.2);
+  --ring: #1f5fe0;
+  --signal: #1f5fe0;
+  --cyan: #0b8aa3;
+
+  /* The document sheet in Document Intelligence stays paper in both themes. */
+  --paper: #fdfcf9;
+  --paper-ink: #1a1d24;
+
+  /* Navigation chrome stays graphite in both themes. */
+  --sidebar: #0b0e14;
+  --sidebar-foreground: #aab3c5;
+  --sidebar-primary: #5b9bff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgb(255 255 255 / 0.06);
+  --sidebar-accent-foreground: #f1f3f8;
+  --sidebar-border: rgb(170 185 215 / 0.12);
+  --sidebar-ring: #5b9bff;
+
+  /* Status — reserved for risk and severity, always paired with a glyph and a label. */
+  --status-good: #109a66;
+  --status-warning: #d6940a;
+  --status-serious: #e0672f;
+  --status-critical: #d2392f;
+
+  /* Sequential heat (one hue): intensity encodes magnitude of a lower-is-better score. */
+  --heat: #d2472c;
+
+  /* Categorical series — fixed order, validated for CVD separation on this surface. */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #6250d6;
+  --chart-1: var(--series-1);
+  --chart-2: var(--series-2);
+  --chart-3: var(--series-3);
+  --chart-4: var(--series-4);
+  --chart-5: var(--series-5);
+  --chart-grid: rgb(18 22 31 / 0.08);
+  --chart-axis: rgb(18 22 31 / 0.24);
+}
+
+/* Graphite theme (default): deep graphite-navy canvas with barely raised plates. */
+.dark {
+  --background: #090c12;
+  --foreground: #e7eaf1;
+  --card: #0f131b;
+  --card-foreground: #e7eaf1;
+  --popover: #141922;
+  --popover-foreground: #e7eaf1;
+  --surface-2: #131822;
+  --primary: #3274f2;
+  --primary-foreground: #ffffff;
+  --secondary: #171c27;
+  --secondary-foreground: #dde2ec;
+  --muted: #151a24;
+  --muted-foreground: #8f99ad;
+  --faint: #626c80;
+  --accent: #1a202c;
+  --accent-foreground: #e7eaf1;
+  --destructive: #f0635c;
+  --border: rgb(170 185 215 / 0.11);
+  --rule: rgb(170 185 215 / 0.3);
+  --input: rgb(170 185 215 / 0.2);
+  --ring: #5b9bff;
+  --signal: #6aa5ff;
+  --cyan: #58cbe0;
+
+  --sidebar: #06080c;
+
+  --status-good: #2fbf8a;
+  --status-warning: #f0a92b;
+  --status-serious: #ee7d4f;
+  --status-critical: #f0554f;
+  --heat: #f0603f;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #9085e9;
+  --chart-grid: rgb(170 185 215 / 0.08);
+  --chart-axis: rgb(170 185 215 / 0.24);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "zero";
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+  /* Slim, recessive scrollbars that suit dense data surfaces. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--muted-foreground) 35%, transparent) transparent;
+  }
+}
+
+/* ── Typographic voices ─────────────────────────────────────────────────── */
+
+/* Mono measures: every figure is set in the monospace with fixed-width digits. */
+@utility tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Technical label: small monospace capitals. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65625rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* Serif says: page titles and findings. */
+@utility display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.022em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+/* Large measured figure. */
+@utility figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+/* ── Surfaces and instruments ───────────────────────────────────────────── */
+
+/* Engineering grid, used on the sign-in brand panel. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(170 185 215 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(170 185 215 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Ruler ticks under a 0–1 scale: one tick per tenth. */
+@utility ticks {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--chart-axis) 0,
+    var(--chart-axis) 1px,
+    transparent 1px,
+    transparent 10%
+  );
+  background-size: calc(100% - 1px) 100%;
+  background-repeat: repeat-x;
+}
+
+/* Hide scrollbars on horizontally scrolling strips. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes signal-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@utility animate-signal {
+  animation: signal-pulse 2.2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
